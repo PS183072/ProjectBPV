@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Controller@LoadHomepage');
+Route::get('/home', 'Controller@LoadHomepage');
+Route::get('/logout', 'UserController@getLogout');
