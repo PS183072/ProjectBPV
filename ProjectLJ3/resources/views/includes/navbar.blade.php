@@ -6,20 +6,26 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item ">
+        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="stagelijst">Stagelijst</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="formulier">Formulier</a>
       </li>
     </ul>
     <ul class="navbar-nav  navbar-right">
       <?php
       if(empty($email) || empty($username))
       {
-        echo "<li class='ml-2'><a class='a-login' href='login/microsoft'>Log in als student</a></li>
-        <li class='ml-2'><a class='a-login' href='#about'>Log in als bedrijf</a></li>";
+        echo "<li class='ml-2'><a class='a-login' href='./login/microsoft'>Log in als student</a></li>
+        <li class='ml-2'><a class='a-login' href='./bedrijf'>Log in als bedrijf</a></li>";
       }
       else
       {
-        echo "<li class='ml-2'>" . $username . "<span class='ml-2'>( " . $email . "</span> )<a class='a-login ml-2' href='logout'>Log uit</a></li>";
+        echo "<li class='ml-2'><span class='ml-2'> " . $email . "</span> <a class='a-login ml-2' href='logout'>Uitloggen <i class='fas fa-sign-out-alt'></i></a></li>";
       }
 
       ?>

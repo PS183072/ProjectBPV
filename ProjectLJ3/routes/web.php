@@ -11,6 +11,14 @@
 |
 */
 
+// Main Controller
 Route::get('/', 'Controller@LoadHomepage');
 Route::get('/home', 'Controller@LoadHomepage');
 Route::get('/logout', 'UserController@getLogout');
+Route::get('/bedrijf', 'Controller@LoadBedrijfLogin');
+Route::get('/stagelijst', 'VoorkeurController@LoadStagelijst');
+Route::get('/formulier', 'Controller@LoadFormulier');
+// Voorkeurcontroller
+Route::post('/formulier', 'VoorkeurController@InsertFormulier');
+Route::get('/voorkeur', 'VoorkeurController@LoadVoorkeur');
+

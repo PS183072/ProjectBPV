@@ -1,0 +1,137 @@
+<!DOCTYPE html> <!-- resources\views\overzicht.php -->
+<html lang='nl'>
+<head>
+    <title>Vul formulier in</title>
+    @include('includes/head')
+    
+</head>
+<body style="background-color: #e5e5e5;">
+    @include('includes/navbar')
+    <div class="container"> 
+    <?php
+    // I'm India so my timezone is Asia/Calcutta
+    date_default_timezone_set('Europe/Amsterdam');
+
+    // 24-hour format of an hour without leading zeros (0 through 23)
+    $Hour = date('G');
+
+    $userarray = explode(",", $username);
+    $user = $userarray[0] . $userarray[1];
+    $userarray2 = explode(" ", $user);
+    
+    if(!empty($request) && isset($request))
+    {
+
+        echo $request;
+    }
+    $name = "";
+    if (count($userarray2) == 2) {
+        $name = $userarray2[1] . " " . $userarray2[0];
+    }
+    else if (count($userarray2) == 3) {
+        $name = $userarray2[1] . " " . $userarray2[2] . " " . $userarray2[0];
+    }
+    else if (count($userarray2) == 4) {
+        $name = $userarray2[1] . " " . $userarray2[2] . " " . $userarray2[3] . " " . $userarray2[0];
+    }
+    else {
+        $name = "Error";
+    }
+    if ( $Hour >= 5 && $Hour <= 11 ) {
+        echo " <div class='ml-2 pt-4 pb-4'><h3>Goedemorgen " . $name ."</h3></div>"; 
+    } else if ( $Hour >= 12 && $Hour <= 18 ) {
+        echo " <div class='ml-2 pt-4 pb-4'><h3>Goedemiddag " . $name . "</h3></div>"; 
+    } else if ( $Hour >= 19 || $Hour <= 4 ) {
+        echo " <div class='ml-2 pt-4 pb-4'><h3>Goedeavond " . $name . "</h3></div>"; 
+    }
+    else 
+    {
+        echo " <div class='ml-2 pt-4'>Welkom " . $userarray[1] . "</div>"; 
+    }
+    ?>
+  
+    <div class="p-4 form-group ml-2 bg-light">
+    <form action="stagelijst" method="post">
+    @csrf
+    <?php
+    // Check hier de voorkeur    
+        
+    //$voorkeur2 = json_decode($voorkeur, true);
+    //$vk = $voorkeur2[0]["voorkeur"];
+   
+    if($vk == "1")
+    {
+        $totaalaantalstageplekken = 0;
+        echo "Ik zie dat je hebt gekozen voor programmeren als voorkeur.</br>";
+        echo "Hier is een lijst met programmeren stageplekken. Aan jou de keuze.";
+        echo "<div style='display: flex; align-self: right;><button class='btn btn-primary'>Save</button></div>'";
+        echo "<table class='table mt-4  table-condensed'>";
+        echo " <thead>
+        <tr>
+          <th scope='col'>BedrijfID</th>
+          <th scope='col'>Omschrijving</th>
+          <th scope='col'>Straat</th>
+        </tr>
+      </thead><tbody>";
+        foreach ($stageplekken as $sp) {
+            $totaalaantalstageplekken++;
+            $BedrijfID = $sp->BedrijfID;
+            $StageplekOmschrijving = $sp->StageplekOmschrijving;
+            $StageplekStraat = $sp->StageplekStraat;
+            $StageplekStraatNr = $sp->StageplekStraatNr;
+            
+            echo "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td></tr>";
+        }   
+        echo "</tbody></table>";
+    }
+    else if($vk == "0")
+    {
+        $totaalaantalstageplekken = 0;
+        echo "<div class='row mb-4'><div class='col-11'>Ik zie dat je hebt gekozen voor web-development als voorkeur.</br>";
+        echo "Hier is een lijst met web-development stageplekken. Aan jou de keuze.</div>";
+        echo "<div class='col-1'><button class='btn btn-primary'>Save</button></div></div>";
+        echo "<table class='table table-condensed'>";
+        echo " <thead>
+        <tr>
+          <th scope='col'>BedrijfID</th>
+          <th scope='col'>Omschrijving</th>
+          <th scope='col'>Straat</th>
+          <th scope='col'>1e</th>
+          <th scope='col'>2e</th>
+        </tr>
+      </thead><tbody>";
+        foreach ($stageplekken as $sp) {
+            $totaalaantalstageplekken++;
+            $BedrijfID = $sp->BedrijfID;
+            $StageplekOmschrijving = $sp->StageplekOmschrijving;
+            $StageplekStraat = $sp->StageplekStraat;
+            $StageplekStraatNr = $sp->StageplekStraatNr;
+            $StageplekID = $sp->StageplekID;
+            echo "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
+        }
+        echo "</tbody></table>";
+        // Echo al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
+    }
+    else
+    {
+       
+        echo "Vul alstublieft eerst het <a href='formulier'>formulier</a> in. ";  
+   
+    }
+    
+
+?>
+    </div>
+    <!--
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div> -->
+    </form>
+    </div>
+    
+    @include('includes/scripts')
+    @include('includes/footer')
+</body>
+
+</html>

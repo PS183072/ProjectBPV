@@ -24,4 +24,40 @@ class Controller extends BaseController
        return view('homepage', array('username'=>$username, 'email' =>$email));
        
     }
+    public function LoadStagelijst()
+    {
+       $username = "";
+       $email = "";
+       // Check login status
+       if (Auth::check())
+       {
+           $username = Auth::user()->name;
+           $email = Auth::user()->email;
+       }
+
+       return view('stagelijst', array('username'=>$username, 'email' =>$email));
+       
+    }
+    public function LoadFormulier()
+    {
+       $username = "";
+       $email = "";
+       // Check login status
+       if (Auth::check())
+       {
+           $username = Auth::user()->name;
+           $email = Auth::user()->email;
+       }
+
+       return view('formulier', array('username'=>$username, 'email' =>$email));
+       
+    }
+    public function LoadBedrijfLogin()
+    {
+       
+
+       return view('bedrijven');
+       
+    }
+    
 }

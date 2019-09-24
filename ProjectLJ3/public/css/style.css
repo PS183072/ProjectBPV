@@ -2,19 +2,26 @@
 
     text-decoration: none;
     display: inline-block;
-    color: black;
-    background-color: white;
 
 }
 .a-login a:link, a:visited{
     text-decoration: none;
     display: inline-block;
-    color: black;
-    background-color: white;
 }
 .a-login a:hover, a:focus, a:active{
     text-decoration: none;
     display: inline-block;
-    color: white;
-    background-color: black;
 }
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  .form-container {
+     
+      border-radius: 10px;
+      border: 1px solid lightgray;
+  }
