@@ -143,7 +143,43 @@
     { 
 
         $DomDing = $DomDing .  "U heeft twee keuzes gemaakt. Deze bestaan uit: </br>";
-   
+        
+        foreach ($aanvragen as $av) {
+            
+            //$totaalaantalstageplekken++;
+            
+            $BedrijfNaam = $av->BedrijfNaam;
+            $BedrijfStraat = $av->BedrijfStraat;
+            $BedrijfStraatNr = $av->BedrijfStraatNr;
+            $BedrijfPlaats = $av->BedrijfPlaats;
+            $StageplekOmschrijving = $av->StageplekOmschrijving;
+            $AanvraagDatum = $av->AanvraagDatum;
+            $Keuze = $av->Eerstekeuze;
+            if($Keuze == 1)
+            {
+                $DomDing = $DomDing .   "<div class='bg-white p-4 mb-4 mt-4' >";
+                $DomDing = $DomDing .  "<b>1ste keuze</b>: </br>";
+                $DomDing = $DomDing .  "Bedrijf naam: " . $BedrijfNaam . "</br>";
+                $DomDing = $DomDing .  "Omschrijving: " . $StageplekOmschrijving . "</br>";
+                $DomDing = $DomDing .  "</div>";
+            }
+            else if($Keuze == 0)
+            {
+                $DomDing = $DomDing .   "<div  class='bg-white p-4'>";
+                $DomDing = $DomDing .  "<b>2de keuze</b>: </br>";
+                $DomDing = $DomDing .  "Bedrijf naam: " . $BedrijfNaam . "</br>";
+                $DomDing = $DomDing .  "Omschrijving: " . $StageplekOmschrijving . "</br>";
+                $DomDing = $DomDing .  "</div>";
+            }
+            //$StageplekOmschrijving = $sp->StageplekOmschrijving;
+            //$StageplekStraat = $sp->StageplekStraat;
+            //$StageplekStraatNr = $sp->StageplekStraatNr;
+            //$StageplekID = $sp->StageplekID;
+            //$StageplekType = $sp->Type;
+
+
+            //$DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
+        }
     }
     else
     {

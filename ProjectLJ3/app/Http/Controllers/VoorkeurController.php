@@ -12,39 +12,6 @@ use Illuminate\Http\Request;
 class VoorkeurController extends BaseController
 {
     
-    public function LoadStagelijst()
-    {
-       $username = "";
-       $email = "";
-       // Check login status
-       if (Auth::check())
-       {
-           $username = Auth::user()->name;
-           $email = Auth::user()->email;
-           $id = Auth::user()->id;
-
-           $getVoorkeur = Voorkeur::getVoorkeur($email);
-           $HeeftAlKeuzesGemaakt = Voorkeur::checkKeuzes($id);
-           $voorkeur2 = json_decode($getVoorkeur, true);
-           $vk = $voorkeur2[0]["voorkeur"];
-          
-           $stageplekken = Voorkeur::getStageplekkenVanVoorkeur($vk);
-          
-           if(count($HeeftAlKeuzesGemaakt) > 0)
-           {
-               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'vk' => -1, 'stageplekken' => $stageplekken));
-           }
-           else
-           {
-               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'vk' => $vk, 'stageplekken' => $stageplekken));
-           }
-       }
-       else
-       {
-           return view('homepage');
-       }
-     
-    }
     public function InsertFormulier(Request $request)
     {
        $username = "";

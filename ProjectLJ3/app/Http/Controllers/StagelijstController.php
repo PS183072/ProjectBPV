@@ -7,10 +7,44 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Stagelijst;
+use App\Voorkeur;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 class StagelijstController extends BaseController
 {
+    public function LoadStagelijst()
+    {
+       $username = "";
+       $email = "";
+       // Check login status
+       if (Auth::check())
+       {
+           $username = Auth::user()->name;
+           $email = Auth::user()->email;
+           $id = Auth::user()->id;
+
+           $getVoorkeur = Voorkeur::getVoorkeur($email);
+           $HeeftAlKeuzesGemaakt = Voorkeur::checkKeuzes($id);
+           $voorkeur2 = json_decode($getVoorkeur, true);
+           $vk = $voorkeur2[0]["voorkeur"];
+          
+           $stageplekken = Voorkeur::getStageplekkenVanVoorkeur($vk);
+           $aanvragen = Stagelijst::getAanvraagVanStudentId($id);
+           if(count($HeeftAlKeuzesGemaakt) > 0)
+           {
+               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'vk' => -1, 'aanvragen' => $aanvragen));
+           }
+           else
+           {
+               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'vk' => $vk, 'stageplekken' => $stageplekken));
+           }
+       }
+       else
+       {
+           return view('homepage');
+       }
+     
+    }
     public function InsertAanvraag(Request $request)
     {
        $username = "";
