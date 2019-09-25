@@ -21,4 +21,6 @@ Route::get('/formulier', 'Controller@LoadFormulier');
 // Voorkeurcontroller
 Route::post('/formulier', 'VoorkeurController@InsertFormulier');
 Route::get('/voorkeur', 'VoorkeurController@LoadVoorkeur');
+// Stagelijstcontroller
+Route::post('/aanvraag', 'StagelijstController@InsertAanvraag');
 

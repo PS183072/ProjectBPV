@@ -13,8 +13,14 @@ class Voorkeur extends Model
     }
     static public function getStageplekkenVanVoorkeur($voorkeur)
     {
-        $voorkeur = DB::table('stageplekken')->where('Type', '=', $voorkeur)->get();
-        return $voorkeur;
+        if ($voorkeur == 0) {
+            $voorkeur = DB::table('stageplekken')->orderBy("type", 'ASC')->get();
+            return $voorkeur;
+        }
+        else if ($voorkeur == 1) {
+            $voorkeur = DB::table('stageplekken')->orderBy("type", 'DESC')->get();
+            return $voorkeur;
+        }
     }
     static public function postVoorkeur($email, $welke_voorkeur, $postcode)
     {

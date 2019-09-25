@@ -51,22 +51,23 @@
     ?>
   
     <div class="p-4 form-group ml-2 bg-light">
-    <form action="stagelijst" method="post">
+    <form action="aanvraag" method="post">
     @csrf
     <?php
     // Check hier de voorkeur    
         
     //$voorkeur2 = json_decode($voorkeur, true);
     //$vk = $voorkeur2[0]["voorkeur"];
+    $DomDing = "";
    
     if($vk == "1")
     {
         $totaalaantalstageplekken = 0;
-        echo "Ik zie dat je hebt gekozen voor programmeren als voorkeur.</br>";
-        echo "Hier is een lijst met programmeren stageplekken. Aan jou de keuze.";
-        echo "<div style='display: flex; align-self: right;><button class='btn btn-primary'>Save</button></div>'";
-        echo "<table class='table mt-4  table-condensed'>";
-        echo " <thead>
+        $DomDing = $DomDing .  "Ik zie dat je hebt gekozen voor programmeren als voorkeur.</br>";
+        $DomDing = $DomDing .  "Hier is een lijst met programmeren stageplekken. Aan jou de keuze.";
+        $DomDing = $DomDing .  "<div style='display: flex; align-self: right;><button class='btn btn-primary'>Save</button></div>'";
+        $DomDing = $DomDing .  "<table class='table mt-4  table-condensed'>";
+        $DomDing = $DomDing .  " <thead>
         <tr>
           <th scope='col'>BedrijfID</th>
           <th scope='col'>Omschrijving</th>
@@ -80,18 +81,18 @@
             $StageplekStraat = $sp->StageplekStraat;
             $StageplekStraatNr = $sp->StageplekStraatNr;
             
-            echo "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td></tr>";
+            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td></tr>";
         }   
-        echo "</tbody></table>";
+        $DomDing = $DomDing .  "</tbody></table>";
     }
     else if($vk == "0")
     {
         $totaalaantalstageplekken = 0;
-        echo "<div class='row mb-4'><div class='col-11'>Ik zie dat je hebt gekozen voor web-development als voorkeur.</br>";
-        echo "Hier is een lijst met web-development stageplekken. Aan jou de keuze.</div>";
-        echo "<div class='col-1'><button class='btn btn-primary'>Save</button></div></div>";
-        echo "<table class='table table-condensed'>";
-        echo " <thead>
+        $DomDing = $DomDing .  "<div class='row mb-4'><div class='col-11'>Ik zie dat je hebt gekozen voor web-development als voorkeur.</br>";
+        $DomDing = $DomDing .  "Hier is een lijst met web-development stageplekken. Aan jou de keuze.</div>";
+        $DomDing = $DomDing .  "<div class='col-1'><button class='btn btn-primary'>Save</button></div></div>";
+        $DomDing = $DomDing .  "<table class='table table-condensed'>";
+        $DomDing = $DomDing .  " <thead>
         <tr>
           <th scope='col'>BedrijfID</th>
           <th scope='col'>Omschrijving</th>
@@ -107,17 +108,18 @@
             $StageplekStraat = $sp->StageplekStraat;
             $StageplekStraatNr = $sp->StageplekStraatNr;
             $StageplekID = $sp->StageplekID;
-            echo "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
+            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
         }
-        echo "</tbody></table>";
-        // Echo al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
+        $DomDing = $DomDing .  "</tbody></table>";
+        // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
     }
     else
     {
        
-        echo "Vul alstublieft eerst het <a href='formulier'>formulier</a> in. ";  
+        $DomDing = $DomDing .  "Vul alstublieft eerst het <a href='formulier'>formulier</a> in. ";  
    
     }
+    echo $DomDing;
     
 
 ?>
