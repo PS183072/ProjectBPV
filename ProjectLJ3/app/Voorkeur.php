@@ -22,6 +22,12 @@ class Voorkeur extends Model
             return $voorkeur;
         }
     }
+    static public function checkKeuzes($StudentID)
+    {
+            $heeftalkeuzesgemaakt = DB::table('aanvragen')->where("StudentID", '=', $StudentID)->get();
+            return $heeftalkeuzesgemaakt;
+      
+    }
     static public function postVoorkeur($email, $welke_voorkeur, $postcode)
     {
         $voorkeur = DB::table('users')->where('email', '=', $email)->update(['voorkeur' => $welke_voorkeur, 'postcode' => $postcode]);

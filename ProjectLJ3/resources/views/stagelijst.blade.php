@@ -59,31 +59,45 @@
     //$voorkeur2 = json_decode($voorkeur, true);
     //$vk = $voorkeur2[0]["voorkeur"];
     $DomDing = "";
-   
+    $Header = true;
     if($vk == "1")
     {
         $totaalaantalstageplekken = 0;
-        $DomDing = $DomDing .  "Ik zie dat je hebt gekozen voor programmeren als voorkeur.</br>";
-        $DomDing = $DomDing .  "Hier is een lijst met programmeren stageplekken. Aan jou de keuze.";
-        $DomDing = $DomDing .  "<div style='display: flex; align-self: right;><button class='btn btn-primary'>Save</button></div>'";
-        $DomDing = $DomDing .  "<table class='table mt-4  table-condensed'>";
+        $DomDing = $DomDing .  "<div class='row mb-4'><div class='col-11'>Ik zie dat je hebt gekozen voor programmeren als voorkeur.</br>";
+        $DomDing = $DomDing .  "Hier is een lijst met programmeren stageplekken. Aan jou de keuze.</div>";
+        $DomDing = $DomDing .  "<div class='col-1'><button class='btn btn-primary'>Save</button></div></div>";
+        $DomDing = $DomDing .  "<table class='table table-condensed'>";
         $DomDing = $DomDing .  " <thead>
         <tr>
           <th scope='col'>BedrijfID</th>
           <th scope='col'>Omschrijving</th>
           <th scope='col'>Straat</th>
+          <th scope='col'>1e</th>
+          <th scope='col'>2e</th>
+          <th scope='col'></th>
         </tr>
       </thead><tbody>";
+      
+        $DomDing = $DomDing .  "<tr class='thead-dark'><th>Programmeren </th><th></th><th></th><th></th><th></th><th></th></tr>";
         foreach ($stageplekken as $sp) {
             $totaalaantalstageplekken++;
             $BedrijfID = $sp->BedrijfID;
             $StageplekOmschrijving = $sp->StageplekOmschrijving;
             $StageplekStraat = $sp->StageplekStraat;
             $StageplekStraatNr = $sp->StageplekStraatNr;
+            $StageplekID = $sp->StageplekID;
+            $StageplekType = $sp->Type;
             
-            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td></tr>";
-        }   
+            
+            if($StageplekType == 0 && $Header == true)
+            {
+                $DomDing = $DomDing .  "<tr class='thead-dark'><th>Web  </th><th></th><th></th><th></th><th></th><th></th></tr>";
+                $Header = false;
+            }
+            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
+        }
         $DomDing = $DomDing .  "</tbody></table>";
+        // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
     }
     else if($vk == "0")
     {
@@ -99,8 +113,11 @@
           <th scope='col'>Straat</th>
           <th scope='col'>1e</th>
           <th scope='col'>2e</th>
+          <th scope='col'></th>
         </tr>
       </thead><tbody>";
+      
+      $DomDing = $DomDing .  "<tr class='thead-dark'><th>Web </th><th></th><th></th><th></th><th></th><th></th></tr>";
         foreach ($stageplekken as $sp) {
             $totaalaantalstageplekken++;
             $BedrijfID = $sp->BedrijfID;
@@ -108,10 +125,25 @@
             $StageplekStraat = $sp->StageplekStraat;
             $StageplekStraatNr = $sp->StageplekStraatNr;
             $StageplekID = $sp->StageplekID;
+            $StageplekType = $sp->Type;
+
+           
+            if($StageplekType == 1 && $Header == true)
+            {
+                $DomDing = $DomDing .  "<tr class='thead-dark'><th>Programmeren </th><th></th><th></th><th></th><th></th><th></th></tr>";
+                $Header = false;
+            }
+
             $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
         }
         $DomDing = $DomDing .  "</tbody></table>";
         // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
+    }
+    else if($vk == -1)
+    { 
+
+        $DomDing = $DomDing .  "U heeft twee keuzes gemaakt. Deze bestaan uit: </br>";
+   
     }
     else
     {
