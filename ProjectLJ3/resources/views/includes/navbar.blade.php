@@ -25,7 +25,7 @@
       }
       else
       {
-        echo "<li class='ml-2'><span class='ml-2'> " . $email . "</span> <a class='a-login ml-2' href='logout'>Uitloggen <i class='fas fa-sign-out-alt'></i></a></li>";
+        echo "<li class='ml-2'><span class='ml-2'> " . $username . "</span> <a class='a-login ml-2' href='logout'>Uitloggen <i class='fas fa-sign-out-alt'></i></a></li>";
       }
 
       ?>
