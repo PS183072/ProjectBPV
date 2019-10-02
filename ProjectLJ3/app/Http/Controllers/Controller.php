@@ -7,6 +7,9 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use App\Mail\Mailing;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Facades\Auth;
 class Controller extends BaseController
 {
@@ -97,10 +100,11 @@ class Controller extends BaseController
     
     public function LoadBedrijfLogin()
     {
-       
-
        return view('bedrijven');
-       
     }
-    
+
+    public function VerzendMails() 
+    {
+        Mail::to('ps183072@summacollege.nl')->send(new Mailing());
+    }
 }

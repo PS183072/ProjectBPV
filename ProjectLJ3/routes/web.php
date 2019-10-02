@@ -18,6 +18,7 @@ Route::get('/logout', 'UserController@getLogout');
 Route::get('/bedrijf', 'Controller@LoadBedrijfLogin');
 Route::get('/formulier', 'Controller@LoadFormulier');
 Route::get('/mailbedrijven', 'Controller@LoadBedrijvenMailen');
+Route::post('/mailbedrijven', 'Controller@VerzendMails');
 
 // Voorkeurcontroller
 Route::post('/formulier', 'VoorkeurController@InsertFormulier');
