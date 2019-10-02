@@ -19,9 +19,14 @@ class Controller extends BaseController
        {
            $username = Auth::user()->name;
            $email = Auth::user()->email;
+           $rol = Auth::user()->rol;
+           return view('homepage', array('username'=>$username, 'email' =>$email, 'rol' => $rol));
        }
-
-       return view('homepage', array('username'=>$username, 'email' =>$email));
+       else
+       {
+        return view('homepage', );
+       }
+       
        
     }
     public function LoadStagelijst()
@@ -33,9 +38,15 @@ class Controller extends BaseController
        {
            $username = Auth::user()->name;
            $email = Auth::user()->email;
-       }
+           $rol = Auth::user()->rol;
+           return view('stagelijst', array('username'=>$username, 'email' =>$email, 'rol' => $rol));
+        }
+        else
+        {
+            return view('homepage');
+        }
 
-       return view('stagelijst', array('username'=>$username, 'email' =>$email));
+      
        
     }
     public function LoadFormulier()
@@ -47,11 +58,43 @@ class Controller extends BaseController
        {
            $username = Auth::user()->name;
            $email = Auth::user()->email;
+           $rol = Auth::user()->rol;
+           return view('formulier', array('username'=>$username, 'email' =>$email, 'rol' => $rol));
        }
-
-       return view('formulier', array('username'=>$username, 'email' =>$email));
+       else
+       {
+           return view('homepage');
+       }
+      
        
     }
+    public function LoadBedrijvenMailen()
+    {
+       $username = "";
+       $email = "";
+       // Check login status
+       if (Auth::check())
+       {
+           $username = Auth::user()->name;
+           $email = Auth::user()->email;
+           $rol = Auth::user()->rol;
+           if($rol == 1)
+           {
+             return view('mailbedrijven', array('username'=>$username, 'email' =>$email, 'rol' => $rol));
+           }
+           else
+           {
+             abort(404);
+           }
+           
+       }
+       else
+       {
+           return view('homepage');
+       }
+       
+    }
+    
     public function LoadBedrijfLogin()
     {
        

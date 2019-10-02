@@ -22,7 +22,7 @@ class StagelijstController extends BaseController
            $username = Auth::user()->name;
            $email = Auth::user()->email;
            $id = Auth::user()->id;
-
+           $rol = Auth::user()->rol;
            $getVoorkeur = Voorkeur::getVoorkeur($email);
            $HeeftAlKeuzesGemaakt = Voorkeur::checkKeuzes($id);
            $voorkeur2 = json_decode($getVoorkeur, true);
@@ -32,11 +32,11 @@ class StagelijstController extends BaseController
            $aanvragen = Stagelijst::getAanvraagVanStudentId($id);
            if(count($HeeftAlKeuzesGemaakt) > 0)
            {
-               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'vk' => -1, 'aanvragen' => $aanvragen));
+               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'vk' => -1, 'aanvragen' => $aanvragen));
            }
            else
            {
-               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'vk' => $vk, 'stageplekken' => $stageplekken));
+               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'vk' => $vk, 'stageplekken' => $stageplekken));
            }
        }
        else
@@ -55,12 +55,12 @@ class StagelijstController extends BaseController
             $username = Auth::user()->name;
             $email = Auth::user()->email;
             $id = Auth::user()->id;
-
+            $rol = Auth::user()->rol;
             try {
                 $welke_voorkeur = Stagelijst::postKeuzes($id, $request);
-                return view('homepage', array('username'=>$username, 'email'=>$email));
+                return view('homepage', array('username'=>$username, 'email'=>$email, 'rol' => $rol));
             } catch (\Throwable $th) {
-                return view('homepage', array('username'=>$username, 'email' =>$email));
+                return view('homepage', array('username'=>$username, 'email' =>$email, 'rol' => $rol));
             }
            
            

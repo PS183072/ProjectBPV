@@ -9,27 +9,42 @@
       <li class="nav-item ">
         <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="stagelijst">Stagelijst</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="formulier">Formulier</a>
-      </li>
+  <?php
+  if(isset($rol))
+  {
+    if($rol == 1)
+    {
+      echo "<li class='nav-item'>
+      <a class='nav-link' href='mailbedrijven'>Mail bedrijven</a>
+    </li>";
+    }
+    else if($rol == 0)
+    {
+      echo "
+      <li class='nav-item'>
+          <a class='nav-link' href='stagelijst'>Stagelijst</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='formulier'>Formulier</a>
+        </li>
+      ";
+    }
+  }
+  ?>
+      
     </ul>
     <ul class="navbar-nav  navbar-right">
       <?php
       if(empty($email) || empty($username))
       {
-        echo "<li class='ml-2'><a class='a-login' href='./login/microsoft'>Log in als student</a></li>
-        <li class='ml-2'><a class='a-login' href='./bedrijf'>Log in als bedrijf</a></li>";
+        echo "<li class='ml-2'><a class='a-login' href='./login/microsoft'>Log in als student</a></li>";
       }
       else
       {
         echo "<li class='ml-2'><span class='ml-2'> " . $username . "</span> <a class='a-login ml-2' href='logout'>Uitloggen <i class='fas fa-sign-out-alt'></i></a></li>";
       }
 
-      ?>
-      
+      ?> 
     </ul>
   </div>
   </div>

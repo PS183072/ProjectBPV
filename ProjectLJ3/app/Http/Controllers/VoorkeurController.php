@@ -22,6 +22,7 @@ class VoorkeurController extends BaseController
            $username = Auth::user()->name;
            $email = Auth::user()->email;
            $id = Auth::user()->id;
+           $rol = Auth::user()->rol;
            try {
                 $welke_voorkeur = Voorkeur::postVoorkeur($email, $request->optionSelect, $request->postcode);
                 return view('homepage', array('username'=>$username, 'email'=>$email));
