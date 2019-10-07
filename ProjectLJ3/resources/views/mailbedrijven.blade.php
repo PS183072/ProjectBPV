@@ -8,7 +8,9 @@
 <body style="background-color: #e5e5e5;">
     @include('includes/navbar')
     <div class="container pl-4"> 
-    
+    <?php
+    echo $uuid;
+    ?>
     </div>
     @include('includes/scripts')
     @include('includes/footer')

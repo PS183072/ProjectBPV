@@ -6,7 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 class Controller extends BaseController
 {
@@ -78,13 +78,14 @@ class Controller extends BaseController
            $username = Auth::user()->name;
            $email = Auth::user()->email;
            $rol = Auth::user()->rol;
+           $uuid = Str::uuid()->toString();
            if($rol == 1)
            {
-             return view('mailbedrijven', array('username'=>$username, 'email' =>$email, 'rol' => $rol));
+              return view('mailbedrijven', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'uuid' => $uuid));
            }
            else
            {
-             abort(404);
+              abort(404);
            }
            
        }

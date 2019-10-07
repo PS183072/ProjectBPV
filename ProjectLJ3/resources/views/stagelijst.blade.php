@@ -160,6 +160,7 @@
                 $DomDing = $DomDing .   "<div class='bg-white p-4 mb-4 mt-4' >";
                 $DomDing = $DomDing .  "<b>1ste keuze</b>: </br>";
                 $DomDing = $DomDing .  "Bedrijf naam: " . $BedrijfNaam . "</br>";
+                $DomDing = $DomDing .  "Bedrijf naam: " . $BedrijfStraat . " " . $BedrijfStraatNr . "</br>";
                 $DomDing = $DomDing .  "Omschrijving: " . $StageplekOmschrijving . "</br>";
                 $DomDing = $DomDing .  "</div>";
             }
