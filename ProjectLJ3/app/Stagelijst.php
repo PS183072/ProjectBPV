@@ -13,6 +13,17 @@ class Stagelijst extends Model
         ->join('bedrijven', 'stageplekken.BedrijfID', '=', 'bedrijven.BedrijfID')->where('aanvragen.StudentID', '=', $StudentID)->get();
         return $voorkeur;
     }
+    static public function InsertUuid($uuid, $id)
+    {
+        $voorkeur = DB::table('bedrijven')->where('BedrijfID', '=', $id)->update(['MailingID' => $uuid]);
+        return $voorkeur;
+    }
+    static public function BedrijvenOphalen()
+    {
+        
+        $voorkeur = DB::table('bedrijven')->get();
+        return $voorkeur;
+    }
     static public function postKeuzes($StudentID, $request)
     {
         $keuzeloop1 = $request->keus1;

@@ -27,3 +27,5 @@ Route::get('/voorkeur', 'VoorkeurController@LoadVoorkeur');
 Route::post('/aanvraag', 'StagelijstController@InsertAanvraag');
 Route::get('/stagelijst', 'StagelijstController@LoadStagelijst');
 
+// MailController
+Route::get('/mailen', 'MailController@mail');
