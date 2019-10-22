@@ -98,10 +98,11 @@ class Controller extends BaseController
     
     public function LoadBedrijfLogin()
     {
-       
-
        return view('bedrijven');
-       
     }
-    
+
+    public function VerzendMails() 
+    {
+        Mail::to('ps183072@summacollege.nl')->send(new Mailing());
+    }
 }

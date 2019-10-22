@@ -7,7 +7,6 @@ class Stagelijst extends Model
 {
     static public function getAanvraagVanStudentId($StudentID)
     {
-        
         $voorkeur = DB::table('aanvragen')
         ->join('stageplekken', 'stageplekken.StageplekID', '=', 'aanvragen.StageplekID') 
         ->join('bedrijven', 'stageplekken.BedrijfID', '=', 'bedrijven.BedrijfID')->where('aanvragen.StudentID', '=', $StudentID)->get();
@@ -39,6 +38,6 @@ class Stagelijst extends Model
                 // do task when error
                 echo $e->getMessage();   // insert query
             } 
-        return $voorkeur;    
+        return $voorkeur;
     }
 }

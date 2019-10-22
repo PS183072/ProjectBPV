@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!-- resources\views\overzicht.php -->
 <html lang='nl'>
 <head>
-    <title>Vul formulier in</title>
+    <title>Bedrijven Mailen</title>
     @include('includes/head')
     
 </head>
