@@ -29,3 +29,7 @@ Route::get('/stagelijst', 'StagelijstController@LoadStagelijst');
 
 // MailController
 Route::get('/mailen', 'MailController@mail');
+
+//EnqueteController
+Route::get('/enquete', 'EnqueteController@CheckUuid');
+Route::post('/enquete', 'EnqueteController@VerstuurEnquete');
