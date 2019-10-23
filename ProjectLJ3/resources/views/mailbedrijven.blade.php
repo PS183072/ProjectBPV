@@ -13,13 +13,23 @@
     {
         echo "<h1>" . $message . "</h1>";
     }
-    ?>
-    <form method="get" action="mailen">
-    <button class="btn btn-primary mb-4" type="submit">Alle bedrijven mailen</button>
-    </form>
-    <form method="get" action="mailen1">
+    else 
+    {
+        echo '<form method="get" action="mailen">
+        <button class="btn btn-primary mb-4" type="submit">Alle bedrijven mailen</button>
+        </form>
+        <form method="get" action="mailen1">';
+    }
+?>
+    
     @csrf
     <?php
+    if (isset($message) && !empty($message))
+    {
+        
+    }
+    else {
+        
         $DomDing = "";
         $DomDing = $DomDing .  "<table class='table bg-light table-condensed'>";
             $DomDing = $DomDing .  " <thead>
@@ -35,6 +45,7 @@
                 $DomDing = $DomDing .  "<tr><td>" . $BedrijfNaam . "</td><td><button class='btn btn-primary' name='mail' type='submit' value='" . $BedrijfID . "'>Mail</button></td></tr>";
         }
         echo $DomDing;
+    }
     ?>
     </form>
     </div>

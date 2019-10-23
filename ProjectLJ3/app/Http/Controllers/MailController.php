@@ -48,7 +48,7 @@ class MailController extends Controller
             }
         }
     
-        return view('mailbedrijven', array('username' => $username, 'email' =>$email, 'rol' => $rol, 'message', 'Mails verzonden', 'bedrijven' => $bedrijven));
+        return view('mailbedrijven', array('username' => $username, 'email' =>$email, 'rol' => $rol, 'message' => 'Mails verzonden', 'bedrijven' => $bedrijven));
     }
     else {
         abort(404);
