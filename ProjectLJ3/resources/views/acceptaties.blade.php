@@ -6,7 +6,10 @@
     
 </head>
 <body style="background-color: #e5e5e5;">
+@include('includes/navbar')
 <div class="container">
+<form action='aanvragen' method='POST'>
+@csrf
     <?php
     $DomDing = "";
     $DomDing = $DomDing .  "<table class='table table-condensed'>";
@@ -14,6 +17,8 @@
         <tr>
           <th scope='col'>Omschrijving</th>
           <th scope='col'>Type</th>
+          <th scope='col'>Accepteer</th>
+          <th scope='col'>Weiger</th>
         </tr>
       </thead><tbody>";
     foreach($lijst as $ls)
@@ -30,9 +35,12 @@
             {
                 $StageplekTypeString = "Web-development";
             }
-            $DomDing = $DomDing .  "<tr><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekTypeString . "</tr>";
+            $DomDing = $DomDing .  "<tr><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekTypeString . "</td><td><button class='btn btn-success' name='btna' type='submit' value='" . $StageplekID . "'>Accepteer</button></td><td><button name='btnw' class='btn btn-danger' type='submit' value='" . $StageplekID . "'>Weiger</button></tr>";
     }
     echo $DomDing;
     ?>
+    </tbody>
+    </table>
+    </form>
     </div>
 </body>

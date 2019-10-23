@@ -37,3 +37,4 @@ Route::post('/enquete', 'EnqueteController@VerstuurEnquete');
 
 //AanvraagController
 Route::get('/aanvragen', 'AcceptatieController@LoadAcceptaties');
+Route::post('/aanvragen', 'AcceptatieController@StageplekAccepteer');

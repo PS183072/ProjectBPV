@@ -71,7 +71,6 @@
         <tr>
           <th scope='col'>BedrijfID</th>
           <th scope='col'>Omschrijving</th>
-          <th scope='col'>Straat</th>
           <th scope='col'>1e</th>
           <th scope='col'>2e</th>
           <th scope='col'></th>
@@ -83,8 +82,6 @@
             $totaalaantalstageplekken++;
             $BedrijfID = $sp->BedrijfID;
             $StageplekOmschrijving = $sp->StageplekOmschrijving;
-            $StageplekStraat = $sp->StageplekStraat;
-            $StageplekStraatNr = $sp->StageplekStraatNr;
             $StageplekID = $sp->StageplekID;
             $StageplekType = $sp->Type;
             
@@ -94,7 +91,7 @@
                 $DomDing = $DomDing .  "<tr class='thead-dark'><th>Web  </th><th></th><th></th><th></th><th></th><th></th></tr>";
                 $Header = false;
             }
-            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
+            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
         }
         $DomDing = $DomDing .  "</tbody></table>";
         // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
@@ -110,7 +107,6 @@
         <tr>
           <th scope='col'>BedrijfID</th>
           <th scope='col'>Omschrijving</th>
-          <th scope='col'>Straat</th>
           <th scope='col'>1e</th>
           <th scope='col'>2e</th>
           <th scope='col'></th>
@@ -122,8 +118,6 @@
             $totaalaantalstageplekken++;
             $BedrijfID = $sp->BedrijfID;
             $StageplekOmschrijving = $sp->StageplekOmschrijving;
-            $StageplekStraat = $sp->StageplekStraat;
-            $StageplekStraatNr = $sp->StageplekStraatNr;
             $StageplekID = $sp->StageplekID;
             $StageplekType = $sp->Type;
 
@@ -134,7 +128,7 @@
                 $Header = false;
             }
 
-            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
+            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
         }
         $DomDing = $DomDing .  "</tbody></table>";
         // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
