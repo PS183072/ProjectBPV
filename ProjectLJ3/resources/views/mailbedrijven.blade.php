@@ -18,7 +18,7 @@
         echo '<form method="get" action="mailen">
         <button class="btn btn-primary mb-4" type="submit">Alle bedrijven mailen</button>
         </form>
-        <form method="get" action="mailen1">';
+        <form method="post" action="mailen1">';
     }
 ?>
     

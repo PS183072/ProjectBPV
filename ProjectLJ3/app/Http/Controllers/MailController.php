@@ -56,8 +56,33 @@ class MailController extends Controller
     }
     }
 
-    public function singleMail()
+    public function singleMail(Request $request)
     {
-
+        $username = "";
+       $email = "";
+       // Check login status
+        if (Auth::check())
+        {
+            $username = Auth::user()->name;
+            $email = Auth::user()->email;
+            $rol = Auth::user()->rol;
+            $uuid = Str::uuid()->toString();
+            if($rol == 1)
+            {
+                $uuid = (string) Str::uuid();
+                $InsertUUID = Stagelijst::InsertUuid($uuid, $request->mail);
+                $name;
+                $bedrijf = Stagelijst::BedrijfOphalen();
+                foreach ($bedrijf as $b)
+                {
+                    $name = $b->BedrijfNaam;
+                }
+                $subject = 'Summa Stageplek Enquete';
+                if(filter_var($b->BedrijfEmail, FILTER_VALIDATE_EMAIL)) 
+                {
+                    Mail::to($b->BedrijfEmail)->send(new SendMailable($name, $subject, $uuid));
+                }
+            }
+        }
     }
 }
