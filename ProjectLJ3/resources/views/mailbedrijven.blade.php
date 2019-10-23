@@ -7,9 +7,35 @@
 </head>
 <body style="background-color: #e5e5e5;">
     @include('includes/navbar')
-    <div class="container pl-4"> 
+    <div class="container pl-4 pt-4"> 
+    <?php 
+    if (isset($message) && !empty($message))
+    {
+        echo "<h1>" . $message . "</h1>";
+    }
+    ?>
     <form method="get" action="mailen">
-    <button type="submit">Test mail verzenden</button>
+    <button class="btn btn-primary mb-4" type="submit">Alle bedrijven mailen</button>
+    </form>
+    <form method="get" action="mailen1">
+    @csrf
+    <?php
+        $DomDing = "";
+        $DomDing = $DomDing .  "<table class='table bg-light table-condensed'>";
+            $DomDing = $DomDing .  " <thead>
+            <tr>
+              <th scope='col'>Naam</th>
+              <th scope='col'>Mail</th>
+            </tr>
+          </thead><tbody>";
+        foreach($bedrijven as $ls)
+        {
+                $BedrijfID = $ls->BedrijfID;
+                $BedrijfNaam = $ls->BedrijfNaam;
+                $DomDing = $DomDing .  "<tr><td>" . $BedrijfNaam . "</td><td><button class='btn btn-primary' name='mail' type='submit' value='" . $BedrijfID . "'>Mail</button></td></tr>";
+        }
+        echo $DomDing;
+    ?>
     </form>
     </div>
     @include('includes/scripts')

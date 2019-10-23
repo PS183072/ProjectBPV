@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
+use App\Stagelijst;
 use Illuminate\Support\Facades\Auth;
 class Controller extends BaseController
 {
@@ -79,9 +80,10 @@ class Controller extends BaseController
            $email = Auth::user()->email;
            $rol = Auth::user()->rol;
            $uuid = Str::uuid()->toString();
+           $bedrijven = Stagelijst::BedrijvenOphalen();
            if($rol == 1)
            {
-              return view('mailbedrijven', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'uuid' => $uuid));
+              return view('mailbedrijven', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'uuid' => $uuid, 'bedrijven' => $bedrijven));
            }
            else
            {
@@ -99,10 +101,5 @@ class Controller extends BaseController
     public function LoadBedrijfLogin()
     {
        return view('bedrijven');
-    }
-
-    public function VerzendMails() 
-    {
-        Mail::to('ps183072@summacollege.nl')->send(new Mailing());
     }
 }
