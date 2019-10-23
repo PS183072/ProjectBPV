@@ -34,3 +34,6 @@ Route::get('/mailen', 'MailController@mail');
 //EnqueteController
 Route::get('/enquete', 'EnqueteController@CheckUuid');
 Route::post('/enquete', 'EnqueteController@VerstuurEnquete');
+
+//AanvraagController
+Route::get('/aanvragen', 'AcceptatieController@LoadAcceptaties');

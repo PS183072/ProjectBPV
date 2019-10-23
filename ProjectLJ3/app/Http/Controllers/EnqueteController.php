@@ -31,13 +31,23 @@ class EnqueteController extends BaseController
     {
             
             try {
+                session_start();
+                $uuid = $_SESSION["uuid"];
                 // Verwijder uuid
-                $VerwijderUuid = Enquete::VerwijderUuid($request->uuid);
+                $bedrijfid = Enquete::getInfoByUuid($uuid);
+                foreach ($bedrijfid as $bedrijfid)
+                {
+                    $bedrijfid = $bedrijfid->BedrijfID;
+                }
+                $InsertData = Enquete::InsertData($request, $uuid, $bedrijfid);
+                $VerwijderUuid = Enquete::VerwijderUuid($uuid);
                 // Verstuur enquete
                 // $VerstuurEnquete = Enquete::InsertEnquete($request);
-                return view('enquete', array('info'=>$info));
+                session_destroy();
+                $info = [""];
+                return view('enquete', array('info'=>$info, 'succ69' => 1));
             } catch (\Throwable $th) {
-                abort(404);
+                
             }
      
     }

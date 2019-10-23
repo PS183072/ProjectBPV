@@ -14,11 +14,11 @@ class Voorkeur extends Model
     static public function getStageplekkenVanVoorkeur($voorkeur)
     {
         if ($voorkeur == 0) {
-            $voorkeur = DB::table('stageplekken')->orderBy("type", 'ASC')->get();
+            $voorkeur = DB::table('stageplekken')->where('Geaccepteerd', '=', 1)->orderBy("type", 'ASC')->get();
             return $voorkeur;
         }
         else if ($voorkeur == 1) {
-            $voorkeur = DB::table('stageplekken')->orderBy("type", 'DESC')->get();
+            $voorkeur = DB::table('stageplekken')->where('Geaccepteerd', '=', 1)->orderBy("type", 'DESC')->get();
             return $voorkeur;
         }
     }
