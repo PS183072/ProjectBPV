@@ -40,6 +40,16 @@
         echo "<input type='hidden' name='uuid' value='
         "; if(!empty($_GET['uuid'])) { echo trim( $_GET['uuid'], " "); }  echo "'/>";
         ?>
+        <p>Aantal stageplekken</p>
+        <input class="form-control" type="number"/>
+        <p>Omschrijving</p>
+        <input class="form-control" type="textarea"/>
+        <p>Type stage</p>
+        <select name="optionSelect" class="form-control">
+            <!-- TODO: opties uit db halen -->
+            <option  name='options' value='0' id='options1'>Web</option>
+            <option  name='options' value='1' id='options2'>Programmeren</option>
+        </select>
         <button class="btn btn-primary" type="submit">Enquete verzenden</button>
         </form>
         <?php
