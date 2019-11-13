@@ -134,10 +134,8 @@
         // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
     }
     else if($vk == -1)
-    { 
-
+    {
         $DomDing = $DomDing .  "U heeft twee keuzes gemaakt. Deze bestaan uit: </br>";
-        
         foreach ($aanvragen as $av) {
             
             //$totaalaantalstageplekken++;
@@ -154,7 +152,7 @@
                 $DomDing = $DomDing .   "<div class='bg-white p-4 mb-4 mt-4' >";
                 $DomDing = $DomDing .  "<b>1ste keuze</b>: </br>";
                 $DomDing = $DomDing .  "Bedrijf naam: " . $BedrijfNaam . "</br>";
-                $DomDing = $DomDing .  "Bedrijf naam: " . $BedrijfStraat . " " . $BedrijfStraatNr . "</br>";
+                $DomDing = $DomDing .  "Bedrijf adres: " . $BedrijfStraat . " " . $BedrijfStraatNr . "</br>";
                 $DomDing = $DomDing .  "Omschrijving: " . $StageplekOmschrijving . "</br>";
                 $DomDing = $DomDing .  "</div>";
             }
@@ -163,6 +161,7 @@
                 $DomDing = $DomDing .   "<div  class='bg-white p-4'>";
                 $DomDing = $DomDing .  "<b>2de keuze</b>: </br>";
                 $DomDing = $DomDing .  "Bedrijf naam: " . $BedrijfNaam . "</br>";
+                $DomDing = $DomDing .  "Bedrijf adres: " . $BedrijfStraat . " " . $BedrijfStraatNr . "</br>";
                 $DomDing = $DomDing .  "Omschrijving: " . $StageplekOmschrijving . "</br>";
                 $DomDing = $DomDing .  "</div>";
             }

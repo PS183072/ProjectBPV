@@ -74,6 +74,11 @@
             </div>
             <div class="col-lg-9">
                 <select name="optionSelect" class="form-control">
+                <?php
+                foreach ($opleiding_sub as $sb) {
+                    echo "<option id='options" . $sb->subtypeid . "' name='options' value='" . $sb->subtypeid ."'>". $sb->Naam . "</option>";
+                }
+                ?>
                     <option  name='options' value='0' id='options1'>Web</option>
                     <option  name='options' value='1' id='options2'>Programmeren</option>
                 </select>

@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Enquete;
+use App\Voorkeur;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 class EnqueteController extends BaseController
@@ -17,9 +18,10 @@ class EnqueteController extends BaseController
            $uuid = $request->uuid;
            // Check of de uuid bestaat en haal info op vanaf de uuid anders return 404
            $info = Enquete::getInfoByUuid($uuid);
+           $opleiding_sub = Voorkeur::getOpleidingSubs();
            if(count($info) > 0)
            {
-               return view('enquete', array('info'=>$info));
+               return view('enquete', array('info'=>$info, 'opleiding_sub' => $opleiding_sub));
            }
            else
            {

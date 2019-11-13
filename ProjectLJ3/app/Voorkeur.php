@@ -28,6 +28,12 @@ class Voorkeur extends Model
             return $heeftalkeuzesgemaakt;
       
     }
+    static public function getOpleidingSubs()
+    {
+            $opleiding_sub = DB::table('subtypes')->get();
+            return $opleiding_sub;
+      
+    }
     static public function postVoorkeur($email, $welke_voorkeur, $postcode)
     {
         $voorkeur = DB::table('users')->where('email', '=', $email)->update(['voorkeur' => $welke_voorkeur, 'postcode' => $postcode]);

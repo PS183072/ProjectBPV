@@ -35,8 +35,7 @@
                 }
                 echo "</h3>";
                 
-            echo "
-            <form method='POST' action='enquete'>";
+            echo "<form method='POST' action='enquete'>";
             ?>
             @csrf
             <?php
@@ -53,6 +52,11 @@
             <textarea name="beschrijving" class="form-control mb-2" type="textarea"></textarea>
             <p>Type stage</p>
             <select name="optionSelect" class="form-control ">
+            ';
+                foreach ($opleiding_sub as $sb) {
+                    echo "<option id='options" . $sb->subtypeid . "' name='options' value='" . $sb->subtypeid ."'>". $sb->Naam . "</option>";
+                }
+            echo '
                 <!-- TODO: opties uit db halen -->
                 <option  name="options" value="0" id="options1">Web</option>
                 <option  name="options" value="1" id="options2">Programmeren</option>

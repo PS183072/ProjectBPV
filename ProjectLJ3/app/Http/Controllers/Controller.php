@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
 use App\Stagelijst;
+use App\Voorkeur;
 use Illuminate\Support\Facades\Auth;
 class Controller extends BaseController
 {
@@ -60,7 +61,8 @@ class Controller extends BaseController
            $username = Auth::user()->name;
            $email = Auth::user()->email;
            $rol = Auth::user()->rol;
-           return view('formulier', array('username'=>$username, 'email' =>$email, 'rol' => $rol));
+           $opleiding_sub = Voorkeur::getOpleidingSubs();
+           return view('formulier', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'opleiding_sub' => $opleiding_sub));
        }
        else
        {
