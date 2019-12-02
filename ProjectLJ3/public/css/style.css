@@ -30,3 +30,9 @@
       height: 25px;
       padding: 0px;
   }
+  .copyDiv {
+      border: 1px solid lightgray;
+      padding: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }

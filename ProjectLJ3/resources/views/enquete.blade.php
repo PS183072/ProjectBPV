@@ -53,6 +53,7 @@
             </div>
             <div id="parentDiv">
             <div class="copyDiv">
+            <h3>Stageplek:</h3>
             <p>Aantal stageplekken</p>
             <div class="form-group">
             <input class="form-control mb-2" value="0" min="0" name="AantalStageplekken[]" type="number"/>

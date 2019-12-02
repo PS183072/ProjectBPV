@@ -12,8 +12,8 @@
 </script>
 
 <script>
+var original = document.getElementsByClassName('copyDiv')[0];
 function Duplicate() {
-  var original = document.getElementsByClassName('copyDiv')[0];
   var clone = original.cloneNode(true); 
   original.parentNode.appendChild(clone);
 }
