@@ -60,80 +60,8 @@
     //$vk = $voorkeur2[0]["voorkeur"];
     $DomDing = "";
     $Header = true;
-    if($vk == "1")
-    {
-        $totaalaantalstageplekken = 0;
-        $DomDing = $DomDing .  "<div class='row mb-4'><div class='col-11'>Ik zie dat je hebt gekozen voor programmeren als voorkeur.</br>";
-        $DomDing = $DomDing .  "Hier is een lijst met programmeren stageplekken. Aan jou de keuze.</div>";
-        $DomDing = $DomDing .  "<div class='col-1'><button class='btn btn-primary'>Save</button></div></div>";
-        $DomDing = $DomDing .  "<table class='table table-condensed'>";
-        $DomDing = $DomDing .  " <thead>
-        <tr>
-          <th scope='col'>BedrijfID</th>
-          <th scope='col'>Omschrijving</th>
-          <th scope='col'>1e</th>
-          <th scope='col'>2e</th>
-          <th scope='col'></th>
-        </tr>
-      </thead><tbody>";
-      
-        $DomDing = $DomDing .  "<tr class='thead-dark'><th>Programmeren </th><th></th><th></th><th></th><th></th><th></th></tr>";
-        foreach ($stageplekken as $sp) {
-            $totaalaantalstageplekken++;
-            $BedrijfID = $sp->BedrijfID;
-            $StageplekOmschrijving = $sp->StageplekOmschrijving;
-            $StageplekID = $sp->StageplekID;
-            $StageplekType = $sp->Type;
-            
-            
-            if($StageplekType == 0 && $Header == true)
-            {
-                $DomDing = $DomDing .  "<tr class='thead-dark'><th>Web  </th><th></th><th></th><th></th><th></th><th></th></tr>";
-                $Header = false;
-            }
-            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
-        }
-        $DomDing = $DomDing .  "</tbody></table>";
-        // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
-    }
-    else if($vk == "0")
-    {
-        $totaalaantalstageplekken = 0;
-        $DomDing = $DomDing .  "<div class='row mb-4'><div class='col-11'>Ik zie dat je hebt gekozen voor web-development als voorkeur.</br>";
-        $DomDing = $DomDing .  "Hier is een lijst met web-development stageplekken. Aan jou de keuze.</div>";
-        $DomDing = $DomDing .  "<div class='col-1'><button class='btn btn-primary'>Save</button></div></div>";
-        $DomDing = $DomDing .  "<table class='table table-condensed'>";
-        $DomDing = $DomDing .  " <thead>
-        <tr>
-          <th scope='col'>BedrijfID</th>
-          <th scope='col'>Omschrijving</th>
-          <th scope='col'>1e</th>
-          <th scope='col'>2e</th>
-          <th scope='col'></th>
-        </tr>
-      </thead><tbody>";
-      
-      $DomDing = $DomDing .  "<tr class='thead-dark'><th>Web </th><th></th><th></th><th></th><th></th><th></th></tr>";
-        foreach ($stageplekken as $sp) {
-            $totaalaantalstageplekken++;
-            $BedrijfID = $sp->BedrijfID;
-            $StageplekOmschrijving = $sp->StageplekOmschrijving;
-            $StageplekID = $sp->StageplekID;
-            $StageplekType = $sp->Type;
-
-           
-            if($StageplekType == 1 && $Header == true)
-            {
-                $DomDing = $DomDing .  "<tr class='thead-dark'><th>Programmeren </th><th></th><th></th><th></th><th></th><th></th></tr>";
-                $Header = false;
-            }
-
-            $DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
-        }
-        $DomDing = $DomDing .  "</tbody></table>";
-        // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
-    }
-    else if($vk == -1)
+   
+    if($vk == -1)
     {
         $DomDing = $DomDing .  "U heeft twee keuzes gemaakt. Deze bestaan uit: </br>";
         foreach ($aanvragen as $av) {
@@ -175,11 +103,68 @@
             //$DomDing = $DomDing .  "<tr><td>" . $BedrijfID . "</td><td>" . $StageplekOmschrijving . "</td><td>" . $StageplekStraat . " " . $StageplekStraatNr . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" .  "</td></tr>";
         }
     }
-    else
+    else if(empty($vk))
     {
-       
+        echo $vk;
         $DomDing = $DomDing .  "Vul alstublieft eerst het <a href='formulier'>formulier</a> in. ";  
    
+    }
+    else
+    {
+        foreach ($subtype as $sp) {
+            $subtype = $sp->Naam;
+        }
+        // Debugging
+            //echo $stageplekken;
+        //
+        ////// TEST ///////
+            $totaalaantalstageplekken = 0;
+            $DomDing = $DomDing .  "<div class='row mb-4'><div class='col-11'>Ik zie dat je hebt gekozen voor " . $subtype .".</br>";
+            $DomDing = $DomDing .  "Hier is een lijst met " . $subtype ." stageplekken. Aan jou de keuze.</div>";
+            $DomDing = $DomDing .  "<div class='col-1'><button class='btn btn-primary'>Save</button></div></div>";
+            $DomDing = $DomDing .  "<table class='table table-condensed'>";
+            $DomDing = $DomDing .  " <thead>
+            <tr>
+              <th scope='col'>Naam</th>
+              <th scope='col'>Plaats</th>
+              <th scope='col'>Adres</th>
+              <th scope='col'>Postcode</th>
+              <th scope='col'>Contactpersoon</th>
+              <th scope='col'>Telefoon</th>
+              <th scope='col'>Omschrijving</th>
+              <th scope='col'>1e</th>
+              <th scope='col'>2e</th>
+            </tr>
+          </thead><tbody>";
+          if(isset($stageplekken))
+          {
+            $DomDing = $DomDing .  "<tr class='thead-dark'><th>" . $subtype ." </th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+            foreach ($stageplekken as $sp) {
+                $totaalaantalstageplekken++;
+                $BedrijfID = $sp->BedrijfID;
+                $StageplekOmschrijving = $sp->StageplekOmschrijving;
+                $StageplekID = $sp->StageplekID;
+                $StageplekType = $sp->subtypeID;
+                $Bedrijfnaam = $sp->BedrijfNaam;
+                $Bedrijfplaats = $sp->BedrijfPlaats;
+                $BedrijfContactpersoon = $sp->BedrijfContactpersoon;
+                $BedrijfTel = $sp->BedrijfTel;
+                $BedrijfStraat = $sp->BedrijfStraat . " " . (string) $sp->BedrijfStraatNr;
+                $BedrijfPostcode = $sp->BedrijfPostcode;
+
+                if($StageplekType == 0 && $Header == true)
+                {
+                    $DomDing = $DomDing .  "<tr class='thead-dark'><th>Web  </th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+                    $Header = false;
+                }
+                $DomDing = $DomDing .  "<tr><td>" . $Bedrijfnaam . "</td><td>" . $Bedrijfplaats . "</td><td>" . $BedrijfStraat . "</td><td>" . $BedrijfPostcode . "</td><td>" . $BedrijfContactpersoon . "</td><td>" . $BedrijfTel . "</td><td>" . $StageplekOmschrijving . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td></tr>";
+            }
+            $DomDing = $DomDing .  "</tbody></table>";
+            // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek
+        
+          }
+            
+        ////////// TEST //////////
     }
     echo $DomDing;
     

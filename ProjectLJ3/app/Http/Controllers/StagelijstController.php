@@ -25,18 +25,19 @@ class StagelijstController extends BaseController
            $rol = Auth::user()->rol;
            $getVoorkeur = Voorkeur::getVoorkeur($email);
            $HeeftAlKeuzesGemaakt = Voorkeur::checkKeuzes($id);
+
            $voorkeur2 = json_decode($getVoorkeur, true);
            $vk = $voorkeur2[0]["voorkeur"];
-          
+           $getsubtypes = Voorkeur::getsubtypes($vk);
            $stageplekken = Voorkeur::getStageplekkenVanVoorkeur($vk);
            $aanvragen = Stagelijst::getAanvraagVanStudentId($id);
            if(count($HeeftAlKeuzesGemaakt) > 0)
            {
-               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'vk' => -1, 'aanvragen' => $aanvragen));
+               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'vk' => -1, 'aanvragen' => $aanvragen, 'subtype' => $getsubtypes));
            }
            else
            {
-               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'vk' => $vk, 'stageplekken' => $stageplekken));
+               return view('stagelijst', array('username'=>$username, 'email' =>$email, 'rol' => $rol, 'vk' => $vk, 'stageplekken' => $stageplekken, 'subtype' => $getsubtypes));
            }
        }
        else

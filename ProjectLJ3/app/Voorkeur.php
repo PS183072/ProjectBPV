@@ -14,11 +14,16 @@ class Voorkeur extends Model
     static public function getStageplekkenVanVoorkeur($voorkeur)
     {
         if ($voorkeur == 0) {
-            $voorkeur = DB::table('stageplekken')->where('Geaccepteerd', '=', 1)->orderBy("type", 'ASC')->get();
+            $voorkeur = DB::table('stageplekken')->join('bedrijven', 'stageplekken.BedrijfID', '=', 'bedrijven.BedrijfID')->where('Geaccepteerd', '=', 1)->orderBy("subtypeid", 'ASC')->get();
             return $voorkeur;
         }
         else if ($voorkeur == 1) {
-            $voorkeur = DB::table('stageplekken')->where('Geaccepteerd', '=', 1)->orderBy("type", 'DESC')->get();
+            $voorkeur = DB::table('stageplekken')->join('bedrijven', 'stageplekken.BedrijfID', '=', 'bedrijven.BedrijfID')->where('Geaccepteerd', '=', 1)->orderBy("subtypeid", 'DESC')->get();
+            return $voorkeur;
+        }
+        else
+        {
+            $voorkeur = DB::table('stageplekken')->join('bedrijven', 'stageplekken.BedrijfID', '=', 'bedrijven.BedrijfID')->get();
             return $voorkeur;
         }
     }
@@ -38,6 +43,11 @@ class Voorkeur extends Model
     {
         $voorkeur = DB::table('users')->where('email', '=', $email)->update(['voorkeur' => $welke_voorkeur, 'postcode' => $postcode]);
         return $welke_voorkeur;
+    }
+    static public function getsubtypes($vk)
+    {
+        $subtype = DB::table('subtypes')->where('subtypeid', '=', $vk)->get();
+        return $subtype;
     }
 
 }
