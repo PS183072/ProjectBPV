@@ -45,19 +45,29 @@
                 $_SESSION["uuid"] = trim( $_GET['uuid'], " ");
             }
             echo '
+            <div class="btn btn-success enquete" onclick="Duplicate()">
+            +
+            </div>
+            <div class="btn btn-danger enquete" onclick="RemoveDuplicate()">
+            -
+            </div>
+            <div id="parentDiv">
+            <div class="copyDiv">
             <p>Aantal stageplekken</p>
             <div class="form-group">
-            <input class="form-control mb-2" value="0" min="0" name="AantalStageplekken" type="number"/>
+            <input class="form-control mb-2" value="0" min="0" name="AantalStageplekken[]" type="number"/>
             <p>Omschrijving</p>
-            <textarea name="beschrijving" class="form-control mb-2" type="textarea"></textarea>
+            <textarea name="beschrijving[]" class="form-control mb-2" type="textarea"></textarea>
             <p>Type stage</p>
-            <select name="optionSelect" class="form-control ">
+            <select name="optionSelect[]" class="form-control ">
             ';
                 foreach ($opleiding_sub as $sb) {
                     echo "<option id='options" . $sb->subtypeid . "' name='options' value='" . $sb->subtypeid ."'>". $sb->Naam . "</option>";
                 }
             echo '
             </select>
+            </div>
+            </div>
             </div>
             <button class="btn btn-primary mb-4" type="submit">Enquete verzenden</button>
             </form>

@@ -12,6 +12,20 @@
 </script>
 
 <script>
+function Duplicate() {
+  var original = document.getElementsByClassName('copyDiv')[0];
+  var clone = original.cloneNode(true); 
+  original.parentNode.appendChild(clone);
+}
+function RemoveDuplicate() {
+  if (document.getElementsByClassName('copyDiv').length > 1) {
+    var select = document.getElementById('parentDiv');
+    select.removeChild(select.lastChild);
+  }
+}
+</script>
+
+<script>
   $('input[name="keus1"]').click(function () {
     if (this.value == $('input[name=keus2]:checked').val()) {
       $('input[name=keus2]').prop('checked', false);

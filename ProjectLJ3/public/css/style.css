@@ -25,3 +25,8 @@
       border-radius: 10px;
       border: 1px solid lightgray;
   }
+  .enquete {
+      width: 25px;
+      height: 25px;
+      padding: 0px;
+  }
