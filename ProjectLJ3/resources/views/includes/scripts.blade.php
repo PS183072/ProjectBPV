@@ -13,8 +13,8 @@
 
 <script>
 var original = document.getElementsByClassName('copyDiv')[0];
+var clone = original.cloneNode(true); 
 function Duplicate() {
-  var clone = original.cloneNode(true); 
   original.parentNode.appendChild(clone);
 }
 function RemoveDuplicate() {
