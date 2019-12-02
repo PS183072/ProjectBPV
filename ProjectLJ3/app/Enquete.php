@@ -15,9 +15,9 @@ class Enquete extends Model
         $uuid = DB::table('bedrijven')->where('MailingID', '=', $uuid)->update(['MailingID' => '']);
         return $uuid;
     }
-    static public function InsertData($request, $uuid, $bedrijfid) 
+    static public function InsertData($bedrijfid, $asp, $beschr, $opts) 
     {
-        $stageplekken = DB::table('stageplekken')->insert(['BedrijfID' => $bedrijfid, 'StageplekOmschrijving' => $request->beschrijving, 'Type' => $request->optionSelect, 'Aanvraag' => 1, 'Geaccepteerd' => 0, 'Aantal' => $request->AantalStageplekken]);
+        $stageplekken = DB::table('stageplekken')->insert(['BedrijfID' => $bedrijfid, 'StageplekOmschrijving' => $beschr, 'subtypeID' => $opts, 'Aanvraag' => 1, 'Geaccepteerd' => 0, 'Aantal' => $asp]);
         return $stageplekken;
     }
 }

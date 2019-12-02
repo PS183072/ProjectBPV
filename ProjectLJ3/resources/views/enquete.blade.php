@@ -62,9 +62,10 @@
             <p>Type stage</p>
             <select name="optionSelect[]" class="form-control ">
             ';
-                foreach ($opleiding_sub as $sb) {
-                    echo "<option id='options" . $sb->subtypeid . "' name='options' value='" . $sb->subtypeid ."'>". $sb->Naam . "</option>";
-                }
+            
+            foreach ($opleiding_sub as $sb) {   
+                 echo "<option id='options" . $sb->subtypeid . "' name='options' value='" . $sb->subtypeid ."'>" . $sb->opleidingnaam . " (" . $sb->subtypenaam . ")".  "</option>";
+             }
             echo '
             </select>
             </div>

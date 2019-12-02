@@ -31,8 +31,7 @@ class EnqueteController extends BaseController
     }
     public function VerstuurEnquete(Request $request)
     {
-            
-            try {
+           
                 session_start();
                 $uuid = $_SESSION["uuid"];
                 // Verwijder uuid
@@ -41,16 +40,17 @@ class EnqueteController extends BaseController
                 {
                     $bedrijfid = $bedrijfid->BedrijfID;
                 }
-                $InsertData = Enquete::InsertData($request, $uuid, $bedrijfid);
+                for ($i=0; $i < count($request->AantalStageplekken) ; $i++) { 
+                    $InsertData = Enquete::InsertData($bedrijfid, $request->AantalStageplekken[$i], $request->beschrijving[$i], $request->optionSelect[$i]);
+                }
+                
                 $VerwijderUuid = Enquete::VerwijderUuid($uuid);
                 // Verstuur enquete
                 // $VerstuurEnquete = Enquete::InsertEnquete($request);
                 session_destroy();
                 $info = [""];
                 return view('enquete', array('info'=>$info, 'succ69' => 1));
-            } catch (\Throwable $th) {
-                
-            }
+           
      
     }
 }

@@ -35,7 +35,7 @@ class Voorkeur extends Model
     }
     static public function getOpleidingSubs()
     {
-            $opleiding_sub = DB::table('subtypes')->get();
+            $opleiding_sub = DB::table('subtypes')->select('opleidingen.Naam AS opleidingnaam', 'subtypes.Naam as subtypenaam', 'subtypes.subtypeid AS subtypeid')->join('opleidingen', 'subtypes.opleidingid', '=', 'opleidingen.opleidingid')->get();
             return $opleiding_sub;
       
     }
