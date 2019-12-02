@@ -125,15 +125,15 @@
             $DomDing = $DomDing .  "<table class='table table-condensed'>";
             $DomDing = $DomDing .  " <thead>
             <tr>
-              <th scope='col'>Naam</th>
-              <th scope='col'>Plaats</th>
-              <th scope='col'>Adres</th>
-              <th scope='col'>Postcode</th>
-              <th scope='col'>Contactpersoon</th>
-              <th scope='col'>Telefoon</th>
-              <th scope='col'>Omschrijving</th>
-              <th scope='col'>1e</th>
-              <th scope='col'>2e</th>
+              <th onclick='sortTable(0)' scope='col'>Naam</th>
+              <th onclick='sortTable(0)'scope='col'>Plaats</th>
+              <th onclick='sortTable(0)' scope='col'>Adres</th>
+              <th onclick='sortTable(0)' scope='col'>Postcode</th>
+              <th onclick='sortTable(0)' scope='col'>Contactpersoon</th>
+              <th onclick='sortTable(0)' scope='col'>Telefoon</th>
+              <th onclick='sortTable(0)' scope='col'>Omschrijving</th>
+              <th  scope='col'>1e</th>
+              <th  scope='col'>2e</th>
             </tr>
           </thead><tbody>";
           if(isset($stageplekken))
