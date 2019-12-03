@@ -5,6 +5,7 @@ use PHPMailer\PHPMailer;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
+use App\Mail\SendMailable2;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Stagelijst;
@@ -40,28 +41,35 @@ class MailController extends Controller
         $bedrijven = Stagelijst::BedrijvenOphalen();
         
         foreach ($bedrijven as $b)
-        {
-            $name = $b->BedrijfNaam;
-            $subject = 'Summa Stageplek Enquete';
-            $uid = $b->MailingID;
-            if(filter_var($b->BedrijfEmail, FILTER_VALIDATE_EMAIL)) 
             {
-                Mail::to($b->BedrijfEmail)->send(new SendMailable($name, $subject, $uid));
+                $name = $b->BedrijfNaam;
+                $subject = 'Summa Stageplek Enquete';
+                $uid = $b->MailingID;
+                if(filter_var($b->BedrijfEmail, FILTER_VALIDATE_EMAIL)) 
+                {
+                    Mail::to($b->BedrijfEmail)->send(new SendMailable($name, $subject, $uid));
+                }
+            }
+        
+            return view('mailbedrijven', array('username' => $username, 'email' =>$email, 'rol' => $rol, 'message' => 'Mails verzonden', 'bedrijven' => $bedrijven));
+        }
+            else {
+                abort(404);
             }
         }
-    
-        return view('mailbedrijven', array('username' => $username, 'email' =>$email, 'rol' => $rol, 'message' => 'Mails verzonden', 'bedrijven' => $bedrijven));
+        else 
+        {
+            abort(404);
+        }
     }
-    else {
-        abort(404);
-    }
-    }
-    else 
+    public function CheckWhichKindOfMail(Request $request)
     {
-        abort(404);
+        if (isset($request->mail)) {
+            $this->singleMail($request);
+        } else if(isset($request->mail2)){
+            $this->singleHerinningsMail($request);
+        }
     }
-    }
-
     public function singleMail(Request $request)
     {
         $username = "";
@@ -101,4 +109,42 @@ class MailController extends Controller
             abort(404);
         }
     }
+    public function singleHerinningsMail(Request $request)
+    {
+        $username = "";
+       $email = "";
+       // Check login status
+        if (Auth::check())
+        {
+            $username = Auth::user()->name;
+            $email = Auth::user()->email;
+            $rol = Auth::user()->rol;
+            if($rol == 1)
+            {
+                $name;
+                $bedrijf = Stagelijst::BedrijfOphalen($request->mail2);
+                foreach ($bedrijf as $b)
+                {
+                    $name = $b->BedrijfNaam;
+                    $uuid = $b->MailingID;
+                }
+                $subject = 'Summa Stageplek Enquete Herinnering';
+                if(filter_var($b->BedrijfEmail, FILTER_VALIDATE_EMAIL)) 
+                {
+                    Mail::to($b->BedrijfEmail)->send(new SendMailable2($name, $subject, $uuid));
+                    $bedrijven = Stagelijst::BedrijvenOphalen();
+                    return view('mailbedrijven', array('username' => $username, 'email' =>$email, 'rol' => $rol, 'message' => 'Mail verzonden', 'bedrijven' => $bedrijven));
+                }
+            }
+            else 
+            {
+                abort(404);
+            }
+        }
+        else 
+        {
+            abort(404);
+        }
+    }
+    
 }

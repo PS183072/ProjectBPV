@@ -28,6 +28,11 @@ class Stagelijst extends Model
         $bedrijf = DB::table('bedrijven')->where('BedrijfID', '=', $id)->get();
         return $bedrijf;
     }
+    static public function HaalUuidOp($id)
+    {
+        $bedrijf = DB::table('bedrijven')->where('MailingID', '=', $id)->get();
+        return $bedrijf;
+    }
     static public function postKeuzes($StudentID, $request)
     {
         $keuzeloop1 = $request->keus1;

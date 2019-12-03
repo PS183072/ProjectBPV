@@ -42,7 +42,7 @@
         {
                 $BedrijfID = $ls->BedrijfID;
                 $BedrijfNaam = $ls->BedrijfNaam;
-                $DomDing = $DomDing .  "<tr><td>" . $BedrijfNaam . "</td><td><button class='btn btn-primary' name='mail' type='submit' value='" . $BedrijfID . "'>Mail</button></td></tr>";
+                $DomDing = $DomDing .  "<tr><td>" . $BedrijfNaam . "</td><td><button class='btn btn-primary' name='mail' type='submit' value='" . $BedrijfID . "'>Mail</button><button class='btn btn-success ml-4' name='mail2' type='submit' value='" . $BedrijfID . "'>Herinneringsmail</button></td></tr>";
         }
         echo $DomDing;
     }

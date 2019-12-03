@@ -30,7 +30,7 @@ Route::get('/stagelijst', 'StagelijstController@LoadStagelijst');
 
 // MailController
 Route::get('/mailen', 'MailController@mail');
-Route::post('/mailen1', 'MailController@singleMail');
+Route::post('/mailen1', 'MailController@CheckWhichKindOfMail');
 
 //EnqueteController
 Route::get('/enquete', 'EnqueteController@CheckUuid');
