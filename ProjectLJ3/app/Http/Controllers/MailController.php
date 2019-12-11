@@ -10,13 +10,14 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Stagelijst;
 use Illuminate\Http\Request;
+use App\Enquete;
 
 class MailController extends Controller
 {
 
-    public function mail()
+    public function mail(Request $request)
     {   
-        
+    
        $username = "";
        $email = "";
        // Check login status
@@ -29,44 +30,72 @@ class MailController extends Controller
            if($rol == 1)
            {
         $bedrijven = Stagelijst::BedrijvenOphalen();
-       
-        foreach ($bedrijven as $b)
+        if (isset($request->MailAllen1)) 
         {
-            // Database functie: Insert uuid
-            $uuid = (string) Str::uuid();
-            $InsertUUID = Stagelijst::InsertUuid($uuid, $b->BedrijfID);
-        }
-        // Database functie: Haal bedrijven op
-        
-        $bedrijven = Stagelijst::BedrijvenOphalen();
-        
-        foreach ($bedrijven as $b)
+            foreach ($bedrijven as $b)
             {
-                $name = $b->BedrijfNaam;
-                $subject = 'Summa Stageplek Enquete';
-                $uid = $b->MailingID;
-                if(filter_var($b->BedrijfEmail, FILTER_VALIDATE_EMAIL)) 
+                // Database functie: Insert uuid
+                $uuid = (string) Str::uuid();
+                $InsertUUID = Stagelijst::InsertUuid($uuid, $b->BedrijfID);
+            }
+            // Database functie: Haal bedrijven op
+            
+            $bedrijven = Stagelijst::BedrijvenOphalen();
+            
+            foreach ($bedrijven as $b)
                 {
-                    Mail::to($b->BedrijfEmail)->send(new SendMailable($name, $subject, $uid));
+                    $name = $b->BedrijfNaam;
+                    $subject = 'Summa Stageplek Enquete';
+                    $uid = $b->MailingID;
+                    if(filter_var($b->BedrijfEmail, FILTER_VALIDATE_EMAIL)) 
+                    {
+                        Mail::to($b->BedrijfEmail)->send(new SendMailable($name, $subject, $uid));
+                    }
+                }
+            
+                return view('mailbedrijven', array('username' => $username, 'email' =>$email, 'rol' => $rol, 'message' => 'Mails verzonden', 'bedrijven' => $bedrijven));
+        }
+        else if (isset($request->MailAllen2))
+        {
+            foreach ($bedrijven as $b)
+                {
+                    $name = $b->BedrijfNaam;
+                    $subject = 'Summa Stageplek Enquete Herinnering';
+                    $uid = $b->MailingID;
+                    if(filter_var($b->BedrijfEmail, FILTER_VALIDATE_EMAIL)) 
+                    {
+                        if ($uid != "" || $uid != null)
+                        {
+                            Mail::to($b->BedrijfEmail)->send(new SendMailable2($name, $subject, $uid));
+                        }
+                    }
+                }
+            
+                return view('mailbedrijven', array('username' => $username, 'email' =>$email, 'rol' => $rol, 'message' => 'Mails verzonden', 'bedrijven' => $bedrijven));
+            }
+        }
+        if (isset($request->Stop))
+        {
+            foreach ($bedrijven as $b)
+            {
+                if ($b->MailingID != "" || $b->MailingID != null)
+                {
+                    Enquete::VerwijderUuid($b->MailingID);
                 }
             }
-        
-            return view('mailbedrijven', array('username' => $username, 'email' =>$email, 'rol' => $rol, 'message' => 'Mails verzonden', 'bedrijven' => $bedrijven));
-        }
-            else {
-                abort(404);
-            }
-        }
-        else 
-        {
-            abort(404);
+            return view('mailbedrijven', array('username' => $username, 'email' =>$email, 'rol' => $rol, 'message' => 'Toegang Teruggetrokken', 'bedrijven' => $bedrijven));
         }
     }
+    else 
+    {
+        abort(404);
+    }
+}
     public function CheckWhichKindOfMail(Request $request)
     {
         if (isset($request->mail)) {
             $this->singleMail($request);
-        } else if(isset($request->mail2)){
+        } else if(isset($request->mail2)){      
             $this->singleHerinningsMail($request);
         }
     }

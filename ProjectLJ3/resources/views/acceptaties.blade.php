@@ -12,7 +12,7 @@
 @csrf
     <?php
     $DomDing = "";
-    $DomDing = $DomDing .  "<table class='table table-condensed'>";
+    $DomDing = $DomDing .  "<table class='table bg-light mt-4 table-condensed'>";
         $DomDing = $DomDing .  " <thead>
         <tr>
           <th scope='col'>Omschrijving</th>
@@ -26,7 +26,7 @@
             $StageplekTypeString = "";
             $StageplekOmschrijving = $ls->StageplekOmschrijving;
             $StageplekID = $ls->StageplekID;
-            $StageplekType = $ls->Type;
+            $StageplekType = $ls->subtypeID;
             if($StageplekType == 1)
             {
                 $StageplekTypeString = "Programmeren";

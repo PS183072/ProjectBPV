@@ -31,6 +31,17 @@ class AcceptatieController extends BaseController
 
     public function StageplekAccepteer(Request $request)
     {
+        if (Auth::check())
+        {
+            $username = Auth::user()->name;
+            $email = Auth::user()->email;
+            $id = Auth::user()->id;
+            $rol = Auth::user()->rol;
+        }
+        else
+        {
+            abort(404);
+        }
         if (isset($request->btna) && !empty($request->btna))
         {
             $geaccepteerd = Acceptaties::Accepteren($request->btna);
@@ -44,7 +55,7 @@ class AcceptatieController extends BaseController
             abort(404);
         }
         $lijst = Acceptaties::LaadAcceptaties();
-        return(view('acceptaties', array('lijst'=>$lijst)));
+        return(view('acceptaties', array('lijst'=>$lijst, 'username'=>$username, 'email'=>$email, 'rol'=>$rol)));
     }
 }
 ?>

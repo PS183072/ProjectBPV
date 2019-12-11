@@ -25,9 +25,9 @@ class VoorkeurController extends BaseController
            $rol = Auth::user()->rol;
            try {
                 $welke_voorkeur = Voorkeur::postVoorkeur($email, $request->optionSelect, $request->postcode);
-                return view('homepage', array('username'=>$username, 'email'=>$email));
+                return view('formulier', array('username'=>$username, 'email'=>$email, 'opleiding_sub' => ''));
            } catch (\Throwable $th) {
-                return view('voorkeur', array('username'=>$username, 'email' =>$email, 'voorkeur' => $welke_voorkeur));
+                return view('formulier', array('username'=>$username, 'email' =>$email, 'voorkeur' => $welke_voorkeur));
            }
            
            
@@ -35,7 +35,7 @@ class VoorkeurController extends BaseController
        }
        else
        {
-           return view('homepage');
+           return view('formulier');
        }
      
     }

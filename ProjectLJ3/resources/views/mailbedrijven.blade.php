@@ -16,7 +16,9 @@
     else 
     {
         echo '<form method="get" action="mailen">
-        <button class="btn btn-primary mb-4" type="submit">Alle bedrijven mailen</button>
+        <button class="btn btn-primary mb-4" name="MailAllen1" value="1" type="submit">Alle bedrijven mailen</button>
+        <button class="btn btn-success mb-4" name="MailAllen2" value="1" type="submit">Herinneringsmail naar iedereen</button>
+        <button class="btn btn-danger mb-4" name="Stop" value="1" type="submit">Stop toegang naar enquete</button>
         </form>
         <form method="post" action="mailen1">';
     }
@@ -40,9 +42,22 @@
           </thead><tbody>";
         foreach($bedrijven as $ls)
         {
+            $disabled;
+            $disabled2;
+            if ($ls->MailingID == "" || $ls->MailingID == null) 
+            {
+                $disabled = "";
+                $disabled2 = "disabled";
+            }
+            else 
+            {
+                $disabled = "disabled";
+                $disabled2 = "";
+            }
+
                 $BedrijfID = $ls->BedrijfID;
                 $BedrijfNaam = $ls->BedrijfNaam;
-                $DomDing = $DomDing .  "<tr><td>" . $BedrijfNaam . "</td><td><button class='btn btn-primary' name='mail' type='submit' value='" . $BedrijfID . "'>Mail</button><button class='btn btn-success ml-4' name='mail2' type='submit' value='" . $BedrijfID . "'>Herinneringsmail</button></td></tr>";
+                $DomDing = $DomDing .  "<tr><td>" . $BedrijfNaam . "</td><td><button class='btn btn-primary' name='mail' type='submit' value='" . $BedrijfID . "'". $disabled . ">Mail</button><button class='btn btn-success ml-4' name='mail2' type='submit' value='" . $BedrijfID . "'". $disabled2 . ">Herinneringsmail</button></td></tr>";
         }
         echo $DomDing;
     }

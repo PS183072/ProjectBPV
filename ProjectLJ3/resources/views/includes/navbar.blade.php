@@ -18,7 +18,7 @@
       <a class='nav-link' href='mailbedrijven'>Mail bedrijven</a>
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='aanvragen'>Aanvragen</a>
+      <a class='nav-link' href='aanvragen'>Stageplekken Aanvragen</a>
     </li>";
     }
     else if($rol == 0)
