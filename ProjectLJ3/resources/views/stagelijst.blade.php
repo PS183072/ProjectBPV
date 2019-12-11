@@ -131,6 +131,7 @@
               <th onclick='sortTable(0)' scope='col'>Postcode</th>
               <th onclick='sortTable(0)' scope='col'>Contactpersoon</th>
               <th onclick='sortTable(0)' scope='col'>Telefoon</th>
+              <th onclick='sortTable(0)' scope='col'>Website</th>
               <th onclick='sortTable(0)' scope='col'>Omschrijving</th>
               <th  scope='col'>1e</th>
               <th  scope='col'>2e</th>
@@ -151,13 +152,14 @@
                 $BedrijfTel = $sp->BedrijfTel;
                 $BedrijfStraat = $sp->BedrijfStraat . " " . (string) $sp->BedrijfStraatNr;
                 $BedrijfPostcode = $sp->BedrijfPostcode;
+                $BedrijfWebsite = $sp->BedrijfWebsite;
 
                 if($StageplekType == 0 && $Header == true)
                 {
                     $DomDing = $DomDing .  "<tr class='thead-dark'><th>Web  </th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
                     $Header = false;
                 }
-                $DomDing = $DomDing .  "<tr><td>" . $Bedrijfnaam . "</td><td>" . $Bedrijfplaats . "</td><td>" . $BedrijfStraat . "</td><td>" . $BedrijfPostcode . "</td><td>" . $BedrijfContactpersoon . "</td><td>" . $BedrijfTel . "</td><td>" . $StageplekOmschrijving . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td></tr>";
+                $DomDing = $DomDing .  "<tr><td>" . $Bedrijfnaam . "</td><td>" . $Bedrijfplaats . "</td><td>" . $BedrijfStraat . "</td><td>" . $BedrijfPostcode . "</td><td>" . $BedrijfContactpersoon . "</td><td>" . $BedrijfTel . "</td><td><a target='_blank' href="  . $BedrijfWebsite . ">" . $BedrijfWebsite . "</a></td><td>" . $StageplekOmschrijving . "</td><td>" . "<input name='keus1' value=" . $StageplekID ." type='radio'></input>" . "</td><td>" . "<input name='keus2' value=" . $StageplekID ." type='radio'></input>" . "</td></tr>";
             }
             $DomDing = $DomDing .  "</tbody></table>";
             // $DomDing = $DomDing .  al de stageplekken waar de categorie van de student gelijk is aan de categorie van de stageplek

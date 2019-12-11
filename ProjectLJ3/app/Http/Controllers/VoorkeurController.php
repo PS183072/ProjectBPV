@@ -25,7 +25,8 @@ class VoorkeurController extends BaseController
            $rol = Auth::user()->rol;
            try {
                 $welke_voorkeur = Voorkeur::postVoorkeur($email, $request->optionSelect, $request->postcode);
-                return view('formulier', array('username'=>$username, 'email'=>$email, 'opleiding_sub' => ''));
+                $opleiding_sub = Voorkeur::getOpleidingSubs();
+                return view('formulier', array('username'=>$username, 'email'=>$email, 'opleiding_sub' => $opleiding_sub));
            } catch (\Throwable $th) {
                 return view('formulier', array('username'=>$username, 'email' =>$email, 'voorkeur' => $welke_voorkeur));
            }
